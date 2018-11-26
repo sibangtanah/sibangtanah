@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="/css/sbgtnh.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/index.style.css">
+	</script>
+	<title>Login Sibangtanah</title>
+</head>
+
+<body>
+	<!-- MULAI NAVBAR -->
+	<nav class="navbar navbar-background-color is-spaced has-shadow" role="navigation" aria-label="main navigation">
+		<div class="container">
+			<div class="navbar-brand">
+				<a class="navbar-item" href="https://sibangtanah.io">
+					<img src="/img/sbgtnh-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="175">
+				</a>
+				<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+					<span aria-hidden="true"></span>
+				</a>
+			</div>
+			<!-- Dari kiri -->
+			<div class="navbar-menu">
+				<div class="navbar-start">
+					<a class="navbar-item" href="/peta">
+						<span class="icon has-text-grey-dark">
+							<i class="fas fa-map"></i>
+						</span>
+						<span class="has-text-grey-dark">Peta</span>
+					</a>
+					<a class="navbar-item" href="/katalog">
+						<span class="icon has-text-grey-dark">
+							<i class="fas fa-book"></i>
+						</span>
+						<span class="has-text-grey-dark">Katalog </span>
+					</a>
+					<a class="navbar-item" href="/notifikasi">
+						<span class="icon has-text-grey-dark">
+							<i class="fas fa-bell"></i>
+						</span>
+						<span class="has-text-grey-dark">Notifikasi</span>
+					</a>
+					<a class="navbar-item" href="/statistik">
+						<span class="icon has-text-grey-dark">
+							<i class="fas fa-chart-area"></i>
+						</span>
+						<span class="has-text-grey-dark"> Statistik</span>
+					</a>
+				</div>
+			</div>
+		</div>
+	</nav>
+	<!-- SELESAI NAVIGASI -->
+
+	<!-- KONTEN -->
+	<section class="section">
+		<div class="container">
+			<form method="post" action="/users/login">
+				<div class="form-group">
+					<label>Username</label>
+					<input type="text" class="form-control" name="username" placeholder="Username">
+				</div>
+				<div class="form-group">
+					<label>Password</label>
+					<input type="password" class="form-control" name="password" placeholder="Password">
+				</div>
+				<button type="submit" class="btn">Submit</button>
+			</form>
+		</div>
+	</section>
+</body>
+
+</html>

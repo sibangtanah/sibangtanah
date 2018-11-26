@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Katalog Sibangtanah</title>
+    <!-- Defaultnya Bulma -->
+    <link rel="stylesheet" href="/css/sbgtnh.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <!-- Data tables Jquery -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">    <!-- JQUERY -->
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript">
+      $(document).ready( function () {
+        $('#katalog').DataTable();
+      } );
+    </script>
+
+  </head>
+  <body>
+
+    <!-- Navbar atas -->
+    <nav class="navbar navbar-background-color is-spaced has-shadow" role="navigation" aria-label="main navigation">
+				<div class="navbar-brand">
+					<a class="navbar-item" href="https://sibangtanah.io">
+						<img src="/img/sbgtnh-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="175">
+					</a>
+					<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+					</a>
+				</div>
+				<!-- Dari kiri -->
+				<div class="navbar-menu">
+					<div class="navbar-start">
+						<a class="navbar-item" href="/peta">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-map"></i>
+							</span>
+							<span class="has-text-grey-dark">Peta</span>
+						</a>
+						<a class="navbar-item" href="/katalog">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-book"></i>
+							</span>
+							<span class="has-text-grey-dark">Katalog </span>
+						</a>
+						<a class="navbar-item" href="/notifikasi">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-bell"></i>
+							</span>
+							<span class="has-text-grey-dark">Notifikasi</span>
+						</a>
+						<a class="navbar-item" href="/statistik">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-chart-area"></i>
+							</span>
+							<span class="has-text-grey-dark"> Statistik</span>
+						</a>
+					</div>
+					<!-- Dari kanan -->
+					<div class="navbar-end">
+						<a class="navbar-item" href="/users/login">
+							<div class="button is-warning is-rounded">
+								<span class="icon has-text-white-ter">
+									<i class="fas fa-sign-in-alt"></i>
+								</span>
+								<span class="has-text-white-ter"> Login</span>
+							</div>
+						</a>
+					</div>
+				</div>
+		</nav>
+    <!-- Selesai Navigasi -->
+    <section class="section">
+      <h1 class="title">Katalog Aset Daerah Pemkab Jepara</h1>
+      <h2 class="subtitle">Hingga saat ini sudah ada 71 aset daerah yang terindeks di Sibangtanah</h2>
+
+      <hr>
+
+      <table class="display" id="katalog">
+        <thead>
+          <tr>
+            <th>Nama Aset</th>
+            <th>Desa</th>
+            <th>Kecamatan</th>
+            <th>Luas</th>
+            <th>Jenis</th>
+            <th>SKPD</th>
+            <th>Sertifikat</th>
+            <th>Unduh Peta</th>
+            <th>Edit</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% catalog.forEach(function(asset) { %>
+          <tr>
+            <td><span><a href="<%= asset.url %>"><%= asset.nama %></a></span></td>
+            <td><%= asset.desa %></td>
+            <td><%= asset.kecamatan %></td>
+            <td><%= asset.luas %></td>
+            <td><%= asset.jenis %></td>
+            <td><%= asset.skd %></td>
+            <td>
+              <a class="button is-primary is-outlined" data-target='modal-card' aria-haspopup="true">Sertifikat</a>
+            </td>
+            <td>
+              <div class="field has-addons">
+                <p class="control">
+                  <a class="button is-link is-outlined" href="/map/petabidang<%=asset.uid%>.jpg">
+                    <span>Peta</span>
+                  </a>
+                </p>
+                <p class="control">
+                  <a class="button is-link is-outlined" href="/map/petaudara<%=asset.uid%>.jpg">
+                    <span>Drone</span>
+                  </a>
+                </p>
+              </div>
+            </td>
+            <td>
+              <a class="button is-danger is-outlined" href="<%= asset.url_katalog %>/edit">
+                <span class="icon is-small">
+                  <i class="far fa-edit"></i>
+                </span>
+              </a>
+            </td>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </section>
+  </body>
+
+  <footer class="footer footer-background-color">
+    <div class="container">
+      <div class="columns">
+        <div class="column is-3">
+          <feature class="image">
+            <img src="/img/sbgtnh-invert.png" alt="Logo Sibangtanah">
+          </feature>
+        </div>
+        <div class="column is-9">
+          <div class="content has-text-white-ter">
+            <p>Sibangtanah disusun oleh <a href="https://ghagak.id">Ghagak</a> untuk Badan Pengelola Keuangan dan Aset Daerah Pemerintah Kabupaten Jepara.
+              Sumber kode yang digunakan sepenuhnya berlisensi <a href="http://opensource.org/licenses/mit-license.php">MIT</a> dan didistribusikan secara terbuka.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+</html>

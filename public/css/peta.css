@@ -1,0 +1,54 @@
+#map {
+  height: calc(100vh - 52px);
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+}
+
+.is-sidebar-size {
+	flex: 0 0 300px;
+}
+
+.panel-peta {
+	height: calc(100vh - 106px);
+	overflow-x: auto;
+	border-right: 1px solid #dbdbdb;
+}
+
+.panel-peta-aset {
+	height: calc(100vh - 52px);
+	overflow-x: auto;
+	border-right: 1px solid #dbdbdb;
+}
+
+.is-panel-title {
+	padding: 120px 12px 12px 12px;
+	color: white;
+	font-weight: bold;
+	font-size: 1.5em;
+	line-height: 1.15;
+}
+
+.is-ppa-content {
+	padding: 12px 12px;
+}
+
+.asset-info {
+	display: none;
+}
+
+html {
+	overflow: hidden;
+}
+
+.table th {
+	font-weight: normal;
+	font-size: 0.9rem;
+}
+
+.panel-header-image {
+	background-image: url('/img/hero-image.jpg');
+	background-position: center;
+    background-repeat: no-repeat;
+    background-size: 300px;
+};

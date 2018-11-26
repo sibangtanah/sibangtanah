@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<link rel="stylesheet" href="/css/sbgtnh.css">
+	<script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+	<link rel="stylesheet" type="text/css" href="/css/index.style.css">
+	</script>
+	<title>Sibangtanah Map</title>
+</head>
+
+<body>
+	<!-- JAVASCRIPT SDK -->
+	<div id="fb-root"></div>
+	<script>(function(d, s, id) {
+	  var js, fjs = d.getElementsByTagName(s)[0];
+	  if (d.getElementById(id)) return;
+	  js = d.createElement(s); js.id = id;
+	  js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v3.2&appId=1404807576323593';
+	  fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
+	<!-- NAVIGASI -->
+	<section class="hero is-fullheight video">
+		<div class="hero-head">
+			<nav class="navbar navbar-background-color is-spaced" role="navigation" aria-label="main navigation">
+				<div class="container">
+					<div class="navbar-brand">
+						<a class="navbar-item" href="/">
+							<img src="/img/sbgtnh-invert.png" alt="Bulma: a modern CSS framework based on Flexbox" width="175">
+						</a>
+						<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+							<span aria-hidden="true"></span>
+							<span aria-hidden="true"></span>
+							<span aria-hidden="true"></span>
+						</a>
+					</div>
+					<!-- Dari kiri -->
+					<div class="navbar-menu">
+						<div class="navbar-start">
+							<a class="navbar-item" href="/peta">
+								<span class="icon has-text-white-ter">
+									<i class="fas fa-map"></i>
+								</span>
+								<span class="has-text-white-ter">Peta</span>
+							</a>
+							<a class="navbar-item" href="/katalog">
+								<span class="icon has-text-white-ter">
+									<i class="fas fa-book"></i>
+								</span>
+								<span class="has-text-white-ter">Katalog </span>
+							</a>
+							<a class="navbar-item" href="/notifikasi">
+								<span class="icon has-text-white-ter">
+									<i class="fas fa-bell"></i>
+								</span>
+								<span class="has-text-white-ter">Notifikasi</span>
+							</a>
+							<a class="navbar-item" href="/statistik">
+								<span class="icon has-text-white-ter">
+									<i class="fas fa-chart-area"></i>
+								</span>
+								<span class="has-text-white-ter"> Statistik</span>
+							</a>
+						</div>
+						<!-- Dari kanan -->
+						<div class="navbar-end">
+							<a class="navbar-item" href="/users/login">
+								<div class="button is-warning is-rounded">
+									<span class="icon has-text-white-ter">
+										<i class="fas fa-sign-in-alt"></i>
+									</span>
+									<span class="has-text-white-ter"> Login</span>
+								</div>
+							</a>
+						</div>
+					</div>
+				</div>
+			</nav>
+		</div>
+		<!-- SELESAI NAVIGASI -->
+
+		<!-- VIDEO -->
+		<div class="hero-video">
+			<video poster="/img/hero-hutan.png" playsinline autoplay muted loop>
+				<source src="/img/hero-hutan.mp4" type="video/mp4">
+				<source src="/img/hero-hutan.webm" type="video/webm">
+			</video>
+		</div>
+		<div class="hero-body">
+			<div class="container has-text-centered">
+				<div class="column is-8 is-offset-2">
+					<h1 class="title is-size-1 has-text-white">
+						<%= data.assetCount %> aset Pemkab Jepara telah tercatat di Sibangtanah!
+					</h1>
+					<h2 class="subtitle has-text-light">
+						Dan masih akan terus bertambah
+					</h2>
+					<a class="button is-danger is-rounded is-centered" href="/peta">Kunjungi Peta</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- HERO TAGLINE -->
+	<section class="hero is-info">
+		<div class="hero-body">
+			<div class="container">
+				<h1 class="subtitle has-text-primary has-text-centered">"Sibangtanah adalah lompatan awal untuk inventarisasi yang transparan di lingkungan Pemkab Jepara, inovatif!"</h3>
+			</div>
+		</div>
+	</section>
+
+	<!-- CONTENT -->
+	<section class="section">
+		<div class="container has-text-centered">
+			<div class="columns">
+				<div class="column is-one-third">
+					<div class="card">
+						<div class="card-image">
+							<figure class="image">
+								<img src="/img/card-1.png" alt="Placeholder image">
+							</figure>
+						</div>
+						<div class="card-content">
+							<h1 class="title">Sibangtanah</h1>
+							<p>Sibangtanah adalah sistem penginformasian inventarisasi bangunan dan tanah milik Kabupaten Jepara yang dikembangkan oleh Badan Pengelola Keuangan dan Aset Daerah Kabupaten Jepara dengan sistem informasi geografis serta dapat diakses secara
+								online, Sibangtanah menginformasikan luasan,lokasi sebaran, riwayat bangunan dan tanah milik pemerintah Kabupaten Jepara Pemerintah Kabupaten Jepara</p>
+						</div>
+					</div>
+				</div>
+				<div class="column is-one-third">
+					<div class="card">
+						<div class="card-image">
+							<figure class="image">
+								<img src="/img/card-2.png" alt="Placeholder image">
+							</figure>
+						</div>
+						<div class="card-content">
+							<h1 class="title">Foto Udara</h1>
+							<p>Inventaris bangunana dan tanah milik pemerintah Kabupaten Jepara dilengkapi dengan tampilan layer foto udara dengan resolusi tinggi sehingga dapat memberikan informasi yang sangat detail mengenai kondisi eksisting bangunan dan tanah dengan
+								kondisi terkini, sehingga pemerintah, masyarakat maupun swasta dapat mengetahui data tersebut secara online, transparan dan terkini.</p>
+						</div>
+					</div>
+				</div>
+				<div class="column is-one-third">
+					<div class="card">
+						<div class="card-image">
+							<figure class="image">
+								<img src="/img/card-3.png" alt="Placeholder image">
+							</figure>
+						</div>
+						<div class="card-content">
+							<h1 class="title">Pemkab Jepara</h1>
+							<p>Sibangtanah adalah sistem penginformasian inventarisasi bangunan dan tanah yang dikembangkan oleh Badan Pengelola Keuangan dan Aset Daerah Kabupaten Jepara.</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="is-divider"></div>
+
+
+	</section>
+
+
+	<!-- KOLOM KOMENTAR -->
+	<section class="hero is-fullheight">
+		<div class="container has-text-centered">
+			<div class="columns">
+				<div class="column is-offset-2 is-8">
+					<h3 class="title is-centered">Komentar</h3>
+					<div class="fb-comments" data-href="http://sibangtanah.jeparakab.go.id" data-width="100%" data-numposts="7"></div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- FOOTER -->
+	<footer class="footer footer-background-color">
+		<div class="container">
+			<div class="columns">
+				<div class="column is-3">
+					<feature class="image">
+						<img src="/img/sbgtnh-invert.png" alt="Logo Sibangtanah">
+					</feature>
+				</div>
+				<div class="column is-9">
+					<div class="content has-text-white-ter">
+						<p>Sibangtanah disusun oleh <a href="https://ghagak.id">Ghagak</a> untuk Badan Pengelola Keuangan dan Aset Daerah Pemerintah Kabupaten Jepara.
+							Sumber kode yang digunakan sepenuhnya berlisensi <a href="http://opensource.org/licenses/mit-license.php">MIT</a> dan didistribusikan secara terbuka.
+						</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</footer>
+</body>
+
+</html>

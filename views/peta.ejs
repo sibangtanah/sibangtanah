@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Peta Sibangtanah</title>
+    <!-- Defaultnya Bulma -->
+    <link rel="stylesheet" href="css/sbgtnh.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- Customisasi Sibangtanah -->
+    <script type="text/javascript" src="/js/peta.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/peta.css">
+
+  </head>
+  <body>
+    <!-- Navbar atas -->
+    <nav class="navbar navbar-background-color" role="navigation" aria-label="main navigation">
+				<div class="navbar-brand">
+					<a class="navbar-item" href="https://sibangtanah.io">
+						<img src="/img/sbgtnh-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="175">
+					</a>
+					<a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+						<span aria-hidden="true"></span>
+					</a>
+				</div>
+				<!-- Dari kiri -->
+				<div class="navbar-menu">
+					<div class="navbar-start">
+						<a class="navbar-item" href="/peta">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-map"></i>
+							</span>
+							<span class="has-text-grey-dark">Peta</span>
+						</a>
+						<a class="navbar-item" href="/katalog">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-book"></i>
+							</span>
+							<span class="has-text-grey-dark">Katalog </span>
+						</a>
+						<a class="navbar-item" href="/notifikasi">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-bell"></i>
+							</span>
+							<span class="has-text-grey-dark">Notifikasi</span>
+						</a>
+						<a class="navbar-item" href="/statistik">
+							<span class="icon has-text-grey-dark">
+								<i class="fas fa-chart-area"></i>
+							</span>
+							<span class="has-text-grey-dark"> Statistik</span>
+						</a>
+					</div>
+					<!-- Dari kanan -->
+					<div class="navbar-end">
+						<a class="navbar-item" >
+              <div class="button is-info is-rounded " href="/user/login">
+                <span class="icon has-text-white-ter">
+                  <i class="fas fa-sign-in-alt"></i>
+							</span>
+							<span class="has-text-white-ter"> Login</span>
+            </div>
+						</a>
+					</div>
+				</div>
+		</nav>
+
+  <!-- Panel sidebar -->
+  <div class="columns is-gapless is-mobile">
+    <div class="column is-sidebar-size">
+      <nav class="panel" id="aset-sbgtnh">
+        <div class="panel-block">
+          <p class="control has-icons-left">
+            <input class="input search" type="text" placeholder="search">
+            <span class="icon is-small is-left">
+              <i class="fas fa-search" aria-hidden="true"></i>
+            </span>
+          </p>
+        </div>
+        <div class="panel-peta is-fullwidth">
+          <% catalog.forEach(function(asset) { %>
+          <a class="panel-block" href="<%= asset.url%>">
+            <span class="panel-icon">
+              <% if (asset.kategori === 'Pertanian') { %>
+              <i class="fas fa-leaf" aria-hidden="true"></i>
+              <% } else if (asset.kategori === 'Pendidikan') { %>
+              <i class="fas fa-pencil-alt" aria-hidden='true'></i>
+              <% } else if (asset.kategori === 'Kesehatan') { %>
+              <i class="fas fa-briefcase-medical " aria-hidden='true'></i>
+              <% } else { %>
+              <i class="fas fa-map-marker" aria-hidden='true'></i>
+              <% } %>
+            </span>
+            <span class="nama-aset"><%= asset.nama %> di <%= asset.kecamatan %></span>
+          </a>
+          <% }); %>
+            <div class="panel-block">
+              <button class="button is-link is-outlined is-fullwidth">
+                reset all filters
+              </button>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+  <!-- Area map -->
+    <div class="column">
+      <div id="map">
+      </div>
+    </div>
+  </div>
+
+  <script type="text/javascript">
+    function initMap() {
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: -6.5987,
+          lng: 110.7087
+        },
+        zoom: 11
+      });
+
+      <% catalog.forEach(function(asset) { %>
+      var marker = new google.maps.Marker({
+        position: {
+          lat: <%= asset.latitude %>,
+          lng: <%= asset.longitude %>
+        },
+        map: map,
+        title: '<%= asset.nama %>'
+      });
+      <% }); %>
+    };
+
+  </script>
+
+  <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWTWj2g3o7QOsluA0_jgp2li92krpmS5Q&amp;callback=initMap"
+    async=""
+    defer=""></script>
+  </body>
+</html>

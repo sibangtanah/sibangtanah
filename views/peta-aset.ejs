@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Peta Sibangtanah</title>
+    <!-- Defaultnya Bulma -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+    <!-- Customisasi Sibangtanah -->
+    <script type="text/javascript" src="/js/peta.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/peta.css">
+
+  </head>
+  <body>
+    <!-- Navbar atas -->
+    <nav class="navbar is-light has-shadow" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="https://sibangtanah.io">
+        <img src="/img/sbgtnh-logo.png" alt="Bulma: a modern CSS framework based on Flexbox" width="175" >
+      </a>
+      <div class="navbar-menu">
+        <div class="navbar-start">
+            <a class="navbar-item" href="/peta">
+              <span class="icon has-text-grey-dark">
+                <i class="fas fa-map"></i>
+              </span>
+              <span class="has-text-grey-dark">Peta</span>
+            </a>
+            <a class="navbar-item" href="/katalog">
+              <span class="icon has-text-grey-dark">
+                <i class="fas fa-book"></i>
+              </span>
+              <span class="has-text-grey-dark">Katalog </span>
+            </a>
+            <a class="navbar-item" href="/notifikasi">
+              <span class="icon has-text-grey-dark">
+                <i class="fas fa-bell"></i>
+              </span>
+              <span class="has-text-grey-dark">Notifikasi</span>
+            </a>
+            <a class="navbar-item" href="/statistik">
+              <span class="icon has-text-grey-dark">
+                <i class="fas fa-chart-area"></i>
+              </span>
+              <span class="has-text-grey-dark"> Statistik</span>
+            </a>
+        </div>
+      </div>
+
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Panel sidebar -->
+  <div class="columns is-gapless is-mobile">
+    <div class="column is-sidebar-size">
+      <nav class="panel">
+        <div class="panel-peta-aset">
+          <div class="is-ppa-content">
+            <h1 class="title"><%= asset.nama %></h1>
+            <h2 class="subtitle"><%= asset.kategori %></h2>
+
+            <figure class="image is-5by4">
+              <img src="/drn/drone<%= asset.uid%>.jpg" alt="Foto Drone <%+asset.nama%>">
+            </figure>
+            <hr>
+            <table class="table is-narrow">
+              <tbody>
+                <tr>
+                  <th>Jenis</th>
+                  <th><%= asset.jenis %></th>
+                </tr>
+                <tr>
+                  <th>Desa</th>
+                  <th><%= asset.desa %></th>
+                </tr>
+                <tr>
+                  <th>Kecamatan</th>
+                  <th><%= asset.kecamatan %></th>
+                </tr>
+                <th><abbr title="Luas dalam Meter Persegi">Luas</abbr></th>
+                <th><%= asset.luas %> meter persegi</th>
+                <tr>
+                  <th><abbr title="Tahun Perolehan">Tahun</abbr></th>
+                  <th><%= asset.tahun_perolehan %></th>
+                </tr>
+                <tr>
+                  <th><abbr title="Asal Perolehan">Asal</abbr></th>
+                  <th><%= asset.asal_perolehan %></th>
+                </tr>
+                <tr>
+                  <th>SKPD</th>
+                  <th><%= asset.skd %></th>
+                </tr>
+                <tr>
+                  <th>Sertifikat</th>
+                  <th><%= asset.nomor_sertifikat %></th>
+                </tr>
+                <tr>
+                  <th>Tanggal Sertifikat</th>
+                  <th><%= asset.tanggal_sertifikat %></th>
+                </tr>
+                <tr>
+                  <th>Hak Pakai</th>
+                  <th><%= asset.hak %></th>
+                </tr>
+              </tbody>
+            </table>
+            <div class="field is-grouped">
+              <p class="control is-right">
+                <a class="button is-rounded is-danger" id="jarak">
+                  <span class="icon">
+                    <i class="fas fa-car"></i>
+                  </span>
+                  <span>Ke Lokasi</span>
+                </a>
+              </p>
+
+              <p class="control is-right">
+                <a class="button is-rounded is-link" href="/peta">
+                  <span class="icon">
+                    <i class="fas fa-undo"></i>
+                  </span>
+                  <span>Kembali</span>
+                </a>
+              </p>
+            </div>
+
+            <hr>
+            <div id="panel-rute"></div>
+            <hr>
+
+          </div>
+        </div>
+      </nav>
+    </div> 
+
+  <!-- Area map -->
+    <div class="column">
+      <div id="map">
+      </div> 
+    </div>
+  </div>
+  <script type="text/javascript">
+    function initMap() {
+      var directionsDisplay = new google.maps.DirectionsRenderer;
+      var directionsService = new google.maps.DirectionsService;
+      var map = new google.maps.Map(document.getElementById('map'), {
+        center: {
+          lat: <%= asset.latitude %>,
+          lng: <%= asset.longitude %>
+        },
+        zoom: 15
+      });
+
+      var marker = new google.maps.Marker({
+        position: {
+          lat: <%= asset.latitude %>,
+          lng: <%= asset.longitude %>
+        },
+        map: map,
+        title: '<%= asset.nama %>'
+      });
+
+      directionsDisplay.setMap(map);
+      directionsDisplay.setPanel(document.getElementById('panel-rute'));
+
+      var onClickHandler = function() {
+        calculateAndDisplayRoute(directionsService, directionsDisplay);
+      }
+
+      document.getElementById('jarak').addEventListener('click', onClickHandler)
+    };      
+
+    function calculateAndDisplayRoute(directionsService, directionsDisplay) {
+      directionsService.route({
+        origin: {
+          lat: -6.590585,
+          lng: 110.6631891
+        },
+        destination: {
+          lat: <%= asset.latitude %>,
+          lng: <%= asset.longitude %>
+        },
+        travelMode: 'DRIVING'
+      }, function(response, status) {
+        if (status === 'OK') {
+          directionsDisplay.setDirections(response);
+        } else {
+          window.alert('Directions request failed due to ' + status);
+        }
+      });
+    }
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWTWj2g3o7QOsluA0_jgp2li92krpmS5Q&amp;callback=initMap" async="" defer=""></script>
+  </body>
+</html>
