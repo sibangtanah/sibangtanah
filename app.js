@@ -28,6 +28,8 @@ var app = express();
 mongoose.connect(mongoDB, {
   useNewUrlParser: true
 });
+mongoose.set('useCreateIndex', true);
+
 
 // Mongoose as a promise library
 mongoose.Promise = global.Promise;
