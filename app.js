@@ -6,7 +6,7 @@ var logger = require('morgan');
 var mongoose = require('mongoose');
 var passport = require('passport');
 var session = require('express-session');
-// var flash = require('connect-flash');
+var flash = require('connect-flash');
 var expressValidator = require('express-validator');
 var moment = require('moment');
 var compression = require('compression');
@@ -75,7 +75,10 @@ app.use(helmet());
 app.use(session({
   secret: 'secret',
   saveUninitialized: true,
-  resave: true
+  resave: true,
+  cookie: {
+    maxAge: 60000
+  }
 }));
 
 // Passport init
@@ -113,16 +116,16 @@ app.use(expressValidator({
 }));
 
 // Connect flash
-// app.use(flash());
+ app.use(flash());
 
 // Global vars
-// app.use(function (req, res, next) {
-//   res.locals.success_msg = req.flash('success_msg');
-//   res.locals.error_msg = req.flash('error_msg');
-//   res.locals.error = req.flash('error');
-//  res.locals.user = req.user || null;
-//  next();
-// });
+app.use(function (req, res, next) {
+ res.locals.success_msg = req.flash('success_msg');
+ res.locals.error_msg = req.flash('error_msg');
+ res.locals.error = req.flash('error');
+res.locals.user = req.user || null;
+next();
+});
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
