@@ -9,7 +9,10 @@ var session = require('express-session');
 var flash = require('connect-flash');
 var expressValidator = require('express-validator');
 var moment = require('moment');
-var RequestLog = require('./models/analytics.model')
+var compression = require('compression');
+var helmet = require('helmet');
+var RequestLog = require('./models/analytics.model');
+var mongoDB = process.env.MONGODB_URI || 'mongodb://bpkadjepara:51BANGTAN46@ds213832.mlab.com:13832/sbgtnh';
 
 // Router declaration
 var indexRouter = require('./routes/index.route');
@@ -22,12 +25,8 @@ var notifikasiRouter = require('./routes/notifikasi.route');
 var app = express();
 
 // Mongoose connect to mLab
-mongoose.connect('mongodb://ds213832.mlab.com:13832/sbgtnh', {
-    useNewUrlParser: true,
-    auth: {
-        user: 'ardhadedhali',
-        password : '<?dua2satu1?>'
-    }
+mongoose.connect(mongoDB, {
+  useNewUrlParser: true
 });
 
 // Mongoose as a promise library
@@ -61,12 +60,16 @@ app.use((req, res, next) => {
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 
+// Compression
+app.use(compression());
+
 // Using variable
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(helmet());
 
 // Express session
 app.use(session({
